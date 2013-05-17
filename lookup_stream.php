@@ -17,7 +17,7 @@ $phpgsb->apikey = $google_api_key;
 $phpgsb->usinglists = array('googpub-phish-shavar','goog-malware-shavar');
 
 $file = $argv[1];
-$handle = fopen("$file", "r");
+$handle = fopen($file, "r");
 if(!$handle)
 	{
 	echo 'Could not establish a read handle to: '.$file.' or no file options was passed as option'."\n";
@@ -32,9 +32,6 @@ while (($data = fgetcsv($handle, 1000, ",")) !== FALSE)
 	if($phpgsb->doLookup($url_to_test))
 		{
 		echo "URL: ".$url_to_test." returned as malicious\n";
-		} else
-		{
-		echo "URL: ".$url_to_test." returned as OK\n";
 		}
 	if($count >= $count_to_echo)
 		{
