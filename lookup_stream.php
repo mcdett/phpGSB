@@ -32,8 +32,11 @@ while (($data = fgetcsv($handle, 1000, ",")) !== FALSE)
 	if($phpgsb->doLookup($url_to_test))
 		{
 		echo "URL: ".$url_to_test." returned as malicious\n";
+		} else
+		{
+		echo "URL: ".$url_to_test." returned as OK\n";
 		}
-	if($count == $count_to_echo)
+	if($count >= $count_to_echo)
 		{
 		echo $count." URLs have been processed\n";
 		$count = 1;
