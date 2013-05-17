@@ -6,9 +6,11 @@ Copyright (c) 2010-2012, Sam Cleaver (Beaver6813, Beaver6813.com)
 All rights reserved.
 
 */
-require("phpgsb.class.php");
-$phpgsb = new phpGSB("DATABASE_NAME","DATABASE_USERNAME","DATABASE_PASSWORD");
+
 //Obtain an API key from: http://code.google.com/apis/safebrowsing/key_signup.html
-$phpgsb->apikey = "API_KEY_HERE";
+$google_api_key = "API_KEY_HERE";
+$dbname = "DATABASE_NAME";
+$dbuser = "DATABASE_USERNAME";
+$dbpass = "DATABASE_PASSWORD";
 
 ?>
