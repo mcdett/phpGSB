@@ -23,7 +23,8 @@ if(!$handle)
 
 while (($data = fgetcsv($handle, 1000, ",")) !== FALSE)
 	{
-	print_r($data);
+	$url_to_test = rtrim($data[0], ".");
+	echo $url_to_test."\n";
 	}
 
 /*
