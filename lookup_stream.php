@@ -10,7 +10,7 @@ require("phpgsb.class.php");
 require("api_keys.php");
 
 
-$count_to_echo = 100;
+$count_to_echo = 1000;
 $count = 0;
 
 $phpgsb = new phpGSB($dbname,$dbuser,$dbpass);
@@ -21,7 +21,7 @@ $file = $argv[1];
 $handle = fopen($file, "r");
 if(!$handle)
 	{
-	echo 'Could not establish a read handle to: '.$file.' or no file options was passed as option'."\n";
+	$this->fatalerror('Could not establish a read handle to: '.$file.' or no file options was passed as option'."\n");
 	exit(1);
 	}
 
@@ -32,12 +32,12 @@ while (($data = fgetcsv($handle, 1000, ",")) !== FALSE)
 	//echo $url_to_test."\n";
 	if($phpgsb->doLookup($url_to_test))
 		{
-		echo "URL: ".$url_to_test." returned as malicious\n";
+		$this->outputmsg("URL: ".$url_to_test." returned as malicious\n");
 		}
-	if($count >= $count_to_echo)
+	if(($count_to_echo % $count) == 0)
 		{
 		echo $count." URLs have been processed\n";
-		$count = 1;
+		//$count = 1;
 		}
 	}
 
