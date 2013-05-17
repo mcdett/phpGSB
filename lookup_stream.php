@@ -12,10 +12,26 @@ require("api_keys.php");
 $phpgsb = new phpGSB($dbname,$dbuser,$dbpass);
 $phpgsb->apikey = $google_api_key;
 $phpgsb->usinglists = array('googpub-phish-shavar','goog-malware-shavar');
+
+$file = $argv[1];
+$handle = fopen("$file", "r");
+if(!$handle)
+	{
+	echo 'Could not establish a read handle to: '.$file.' or no file options was passed as option'."\n";
+	exit(1);
+	}
+
+while (($data = fgetcsv($handle, 1000, ",")) !== FALSE)
+	{
+	print_r($data);
+	}
+
+/*
 //Should return false (not phishing or malware)
 var_dump($phpgsb->doLookup('http://www.google.com'));
 //Should return true, malicious URL
 var_dump($phpgsb->doLookup('http://www.gumblar.cn'));
+*/
 $phpgsb->close();
 
 ?>
