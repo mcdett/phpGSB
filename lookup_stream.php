@@ -9,6 +9,9 @@ All rights reserved.
 require("phpgsb.class.php");
 require("api_keys.php");
 
+$count_to_echo = 100;
+$count = 0;
+
 $phpgsb = new phpGSB($dbname,$dbuser,$dbpass);
 $phpgsb->apikey = $google_api_key;
 $phpgsb->usinglists = array('googpub-phish-shavar','goog-malware-shavar');
@@ -24,7 +27,17 @@ if(!$handle)
 while (($data = fgetcsv($handle, 1000, ",")) !== FALSE)
 	{
 	$url_to_test = rtrim($data[0], ".");
-	echo $url_to_test."\n";
+	$count++;
+	//echo $url_to_test."\n";
+	if($phpgsb->doLookup($url_to_test))
+		{
+		echo "URL: ".$url_to_test." returned as malicious\n";
+		}
+	if($count == $count_to_echo)
+		{
+		echo $count." URLs have been processed\n";
+		$count = 1;
+		}
 	}
 
 /*
